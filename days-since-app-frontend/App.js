@@ -1,35 +1,38 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts, Raleway_400Regular } from "@expo-google-fonts/raleway";
 import { PlayfairDisplay_700Bold } from "@expo-google-fonts/playfair-display";
-import Main from "./src/components/Main";
+import Home from "./src/pages/Home";
+import ProfilePage from "./src/pages/ProfilePage";
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+function App() {
   // load all the custom fonts that will be used
   let [fontsLoaded, fontError] = useFonts({
     Raleway_400Regular,
     PlayfairDisplay_700Bold,
   });
 
-  if (!fontsLoaded && !fontError) {
+  if (!fontsLoaded && fontError) {
     console.log("Error loading fonts");
     return null;
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={{ fontFamily: "Raleway_400Regular", fontSize: 40 }}>
-        Inter Black
-      </Text>
-      <Main />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="profile"
+        screenOptions={{
+          headerShown: false,
+          headerBackVisible: true,
+        }}
+      >
+        <Stack.Screen name="home" component={Home} />
+        <Stack.Screen name="profile" component={ProfilePage} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
+export default App;
