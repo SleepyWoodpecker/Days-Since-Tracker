@@ -22,14 +22,14 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="profile"
+        initialRouteName="home"
         screenOptions={{
           headerShown: false,
           headerBackVisible: true,
         }}
       >
         <Stack.Screen name="home" component={Home} />
-        <Stack.Screen name="profile" component={ProfilePage} />
+        <Stack.Screen name="profile-page" component={ProfilePage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

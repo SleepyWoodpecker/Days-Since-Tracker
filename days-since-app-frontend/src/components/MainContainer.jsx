@@ -1,4 +1,5 @@
 import { SafeAreaView, StyleSheet, View } from "react-native";
+import NavigationFooter from "./NavigationFooter";
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -6,10 +7,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const MainContainer = ({ children }) => {
+const MainContainer = ({ children, currentRoute }) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ height: "100%", wdith: "100%" }}>
       <View style={styles.mainContainer}>{children}</View>
+      <NavigationFooter currentRoute={currentRoute} />
     </SafeAreaView>
   );
 };

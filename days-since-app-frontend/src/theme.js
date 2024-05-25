@@ -1,8 +1,8 @@
 export default Theme = {
   colors: {
-    displayCardColor: "#1D3461",
+    primary: "#1D3461",
     footerColor: "#C7CCD7",
-    boxColor: "#EAE9F2",
+    accent: "#EAE9F2",
     green: "#D1FBCB",
     yellow: "#FFEBBE",
     red: "#FFAFAF",
