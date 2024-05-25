@@ -16,6 +16,11 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingBottom: 25,
     paddingTop: 10,
+    shadowOffset: {
+      height: -8,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 15,
   },
   routeIconWrapper: {
     paddingVertical: 5,
