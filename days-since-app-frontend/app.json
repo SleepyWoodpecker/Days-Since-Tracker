@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "days-since-app-frontend",
+    "slug": "days-since-app-frontend",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo-google-fonts/raleway/Raleway_400Regular.ttf",
+            "node_modules/@expo-google-fonts/playfair-display/PlayfairDisplay_700Bold.ttf"
+          ]
+        }
+      ]
+    ]
+  }
+}
