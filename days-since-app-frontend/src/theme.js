@@ -9,6 +9,7 @@ export default Theme = {
     borderColor: "#656565",
     textLight: "#F2F2F2",
     textDark: "#1A1A1A",
+    inactiveCarousell: "rgba(229, 229, 229, 0.5)",
   },
   font: {
     headerText: "PlayfairDisplay_700Bold",
