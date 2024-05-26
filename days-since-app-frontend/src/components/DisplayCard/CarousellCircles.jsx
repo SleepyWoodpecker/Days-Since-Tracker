@@ -11,11 +11,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const CarousellCircles = ({ numOfCircles }) => {
+const CarousellCircles = ({ numOfCircles, currentActivePage }) => {
   let carousellCircles = [];
 
   for (let i = 0; i < numOfCircles; i++) {
-    carousellCircles.push(<CarousellCircle key={i} isActive={i === 0} />);
+    carousellCircles.push(
+      <CarousellCircle key={i} isActive={i === currentActivePage} />
+    );
   }
 
   return <View style={styles.carousellCircles}>{carousellCircles}</View>;

@@ -1,9 +1,10 @@
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import NavigationFooter from "./NavigationFooter";
+import theme from "../theme";
 
 const styles = StyleSheet.create({
   mainContainer: {
-    marginHorizontal: 12,
+    marginHorizontal: theme.appMargin,
   },
 });
 

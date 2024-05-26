@@ -1,6 +1,8 @@
-import { Text, View } from "react-native";
+import { FlatList, Text, View, Dimensions } from "react-native";
 import theme from "../../theme";
 import CarousellCircles from "./CarousellCircles";
+import LongestStreakCard from "./LongestStreakCard";
+import { useState } from "react";
 
 const styles = {
   displayCardContainer: {
@@ -15,44 +17,55 @@ const styles = {
     shadowOffset: {
       height: 7,
     },
+
     shadowOpacity: 0.25,
   },
-  textContainer: {
+  carousellContainer: {
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap: 15,
-  },
-  whiteText: {
-    color: theme.colors.textLight,
-  },
-  bodyText: {
-    fontSize: theme.fontSize.h4,
-    fontFamily: theme.font.bodyText,
-  },
-  headerTextNumber: {
-    fontSize: theme.fontSize.h0,
-    fontFamily: theme.font.headerText,
-  },
-  headerTextWord: {
-    fontSize: theme.fontSize.h1,
-    fontFamily: theme.font.headerText,
+    flexDirection: "row",
+    width: "100%",
   },
 };
 
 const DisplayCard = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const handleScroll = (e) => {
+    setActiveIndex(
+      parseInt(
+        e.nativeEvent.contentOffset.x /
+          (Dimensions.get("window").width - theme.appMargin * 2)
+      )
+    );
+  };
+
+  const cards = [
+    {
+      id: "StreakPage",
+      el: <LongestStreakCard days={56} habitName={"Habit ABC"} />,
+    },
+    {
+      id: "StreakPageClone",
+      el: <LongestStreakCard days={12} habitName={"HIHI"} />,
+    },
+  ];
+
   return (
     <View style={styles.displayCardContainer}>
-      <View style={styles.textContainer}>
-        <Text style={[styles.whiteText, styles.bodyText]}>Longest Streak</Text>
-        <View style={{ justifyContent: "space-evenly", alignItems: "center" }}>
-          <Text style={[styles.whiteText, styles.headerTextNumber]}>56</Text>
-          {/* To-Do: reduce space here */}
-          <Text style={[styles.whiteText, styles.headerTextWord]}>Days</Text>
-        </View>
-        <Text style={[styles.whiteText, styles.bodyText]}>Habit ABC</Text>
+      <View style={styles.carousellContainer}>
+        <FlatList
+          data={cards}
+          renderItem={(card) => card.item.el}
+          keyExtractor={(card) => card.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          onScroll={handleScroll}
+        />
       </View>
-      <CarousellCircles numOfCircles={3} />
+      <CarousellCircles
+        numOfCircles={cards.length}
+        currentActivePage={activeIndex}
+      />
     </View>
   );
 };

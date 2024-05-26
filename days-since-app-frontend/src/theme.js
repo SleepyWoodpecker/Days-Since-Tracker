@@ -23,4 +23,5 @@ export default Theme = {
     h4: 18,
     h5: 16,
   },
+  appMargin: 12,
 };
