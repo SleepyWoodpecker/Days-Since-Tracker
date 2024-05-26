@@ -24,4 +24,7 @@ export default Theme = {
     h5: 16,
   },
   appMargin: 12,
+  componentMargin: 40,
+  listIconSize: 24,
+  footerHeight: 85,
 };

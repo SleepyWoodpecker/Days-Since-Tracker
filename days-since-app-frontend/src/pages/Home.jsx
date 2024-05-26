@@ -1,16 +1,17 @@
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import MainContainer from "../components/MainContainer";
 import DisplayCard from "../components/DisplayCard";
+import HabitList from "../components/HabitList";
+import theme from "../theme";
 
 const Home = ({ route, navigation }) => {
-  console.log(route);
   return (
     <MainContainer>
-      <View style={{ marginTop: 20 }}>
+      <View
+        style={{ marginTop: 20, display: "flex", gap: theme.componentMargin }}
+      >
         <DisplayCard />
-        <Text style={{ fontFamily: "PlayfairDisplay_700Bold", fontSize: 40 }}>
-          Inter Black
-        </Text>
+        <HabitList />
       </View>
     </MainContainer>
   );

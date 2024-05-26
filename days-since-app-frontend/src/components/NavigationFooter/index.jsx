@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    height: 85,
+    height: theme.footerHeight,
     position: "absolute",
     bottom: 0,
     width: "100%",

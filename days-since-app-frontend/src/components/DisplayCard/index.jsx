@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const styles = {
   displayCardContainer: {
-    height: 280,
+    height: 300,
     width: "100%",
     borderRadius: 20,
     paddingVertical: 10,
