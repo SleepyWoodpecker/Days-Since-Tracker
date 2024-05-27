@@ -4,6 +4,7 @@ import { useFonts, Raleway_400Regular } from "@expo-google-fonts/raleway";
 import { PlayfairDisplay_700Bold } from "@expo-google-fonts/playfair-display";
 import Home from "./src/pages/Home";
 import ProfilePage from "./src/pages/ProfilePage";
+import AddNewHabitPage from "./src/pages/AddNewHabitPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +23,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="home"
+        initialRouteName="add-new-habit-page"
         screenOptions={{
           headerShown: false,
           headerBackVisible: true,
@@ -30,6 +31,7 @@ function App() {
       >
         <Stack.Screen name="home" component={Home} />
         <Stack.Screen name="profile-page" component={ProfilePage} />
+        <Stack.Screen name="add-new-habit-page" component={AddNewHabitPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

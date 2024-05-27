@@ -45,7 +45,7 @@ const NavigationFooter = () => {
     },
     {
       iconName: "plussquareo",
-      routeName: "new-habit",
+      routeName: "add-new-habit-page",
     },
     {
       iconName: "user",
