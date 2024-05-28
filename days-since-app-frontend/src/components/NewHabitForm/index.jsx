@@ -1,9 +1,16 @@
-import { Dimensions, StyleSheet, View, Pressable, Text } from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  View,
+  Pressable,
+  Text,
+  Image,
+} from "react-native";
 import theme from "../../theme";
-import { AntDesign } from "@expo/vector-icons";
 import HabitForm from "./HabitForm";
 import habitFormStore from "../../stores/NewHabitFormStore";
 import habitList from "../../stores/HabitListStore";
+import AddImage from "../../../assets/appIcons/add-image.svg";
 
 const { width } = Dimensions.get("screen");
 
@@ -11,6 +18,7 @@ const styles = StyleSheet.create({
   pageContainer: {
     width: "100%",
     alignItems: "center",
+    height: "100%",
   },
   iconCircle: {
     backgroundColor: theme.colors.accent,
@@ -40,22 +48,42 @@ const styles = StyleSheet.create({
   },
 });
 
-const NewHabitForm = () => {
+const NewHabitForm = ({ modalRef }) => {
   const handleSubmitForm = async () => {
     const { formValues } = habitFormStore;
     r = await habitList.addHabit(formValues);
     console.log(r);
   };
 
+  const handleOpenModal = () => modalRef.current?.expand();
+
   return (
-    <View style={styles.pageContainer}>
-      <View style={styles.iconCircle}>
-        <AntDesign name="picture" size={75} color={theme.colors.borderColor} />
+    <View style={{ marginTop: 20, display: "flex", alignItems: "center" }}>
+      <View style={styles.pageContainer}>
+        <Pressable
+          onPress={handleOpenModal}
+          style={{ height: 275, width: 275, borderRadius: 200 }}
+        >
+          <View style={styles.iconCircle}>
+            <AddImage height={75} fill={theme.colors.borderColor} />
+          </View>
+        </Pressable>
+        <HabitForm />
+        <Pressable
+          style={styles.submitButton}
+          onPress={handleSubmitForm}
+          disabled={habitList.loading}
+        >
+          <Text
+            style={[
+              styles.submitButtonText,
+              { color: habitList.loading ? theme.colors.borderColor : "black" },
+            ]}
+          >
+            Start Tracking
+          </Text>
+        </Pressable>
       </View>
-      <HabitForm />
-      <Pressable style={styles.submitButton} onPress={handleSubmitForm}>
-        <Text style={styles.submitButtonText}>Start Tracking</Text>
-      </Pressable>
     </View>
   );
 };

@@ -5,6 +5,8 @@ import { PlayfairDisplay_700Bold } from "@expo-google-fonts/playfair-display";
 import Home from "./src/pages/Home";
 import ProfilePage from "./src/pages/ProfilePage";
 import AddNewHabitPage from "./src/pages/AddNewHabitPage";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,19 +23,26 @@ function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="add-new-habit-page"
-        screenOptions={{
-          headerShown: false,
-          headerBackVisible: true,
-        }}
-      >
-        <Stack.Screen name="home" component={Home} />
-        <Stack.Screen name="profile-page" component={ProfilePage} />
-        <Stack.Screen name="add-new-habit-page" component={AddNewHabitPage} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <BottomSheetModalProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="add-new-habit-page"
+            screenOptions={{
+              headerShown: false,
+              headerBackVisible: true,
+            }}
+          >
+            <Stack.Screen name="home" component={Home} />
+            <Stack.Screen name="profile-page" component={ProfilePage} />
+            <Stack.Screen
+              name="add-new-habit-page"
+              component={AddNewHabitPage}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 }
 
