@@ -1,6 +1,8 @@
-from flask import Flask
+from utils.app_factory import create_app
+from utils.DB import DB
 
-app = Flask(__name__)
+db = DB()
+app = create_app(db)
 
 
 @app.get("/test")
