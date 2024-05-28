@@ -12,7 +12,7 @@ def test():
     return "This test is successful"
 
 
-@app.post("/addNewHabit")
+@app.post("/add-new-habit")
 def new_habit():
     # check that all required params are present
     if "reason" not in request.json or "goal" not in request.json:
@@ -22,6 +22,17 @@ def new_habit():
         db.queries.add_new_habit(
             conn, reason=request.json["reason"], goal=request.json["goal"]
         )
+
+    return {"ok": True}, 201
+
+
+@app.post("/add-new-occurance")
+def add_occurance():
+    if "habitId" not in request.json:
+        return "Missing habitId", 400
+
+    with db.conn() as conn:
+        db.queries.add_new_habit_record(conn, habitid=request.json["habitId"])
 
     return {"ok": True}, 201
 

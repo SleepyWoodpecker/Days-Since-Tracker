@@ -21,6 +21,8 @@ CREATE TABLE IF NOT EXISTS milestone (
   number_of_days INT PRIMARY KEY
 );
 
+
+
 -- name: add_new_habit!
 -- add a new habit to the habit tracker, without returning a new id
 WITH temp_table AS (
@@ -29,3 +31,8 @@ WITH temp_table AS (
 ) 
 INSERT INTO goal (habitid, goal_days)
 SELECT habitid, :goal FROM temp_table;
+
+
+-- name: add_new_habit_record!
+-- add a new occurance of the habit
+INSERT INTO habit_record (occurance, habitid) VALUES (DATE(NOW()), :habitid)
