@@ -10,7 +10,7 @@ load_dotenv(find_dotenv())
 
 class DB:
     def __init__(self):
-        self.queries = aiosql.from_path("sql/create_tables.sql", "psycopg")
+        self.queries = aiosql.from_path("sql/queries.sql", "psycopg")
         self.pool = ConnectionPool(os.getenv("PG_CONN_STR"), open=True)
 
     # this is like a destructor in C++
@@ -22,9 +22,10 @@ class DB:
         with self.pool.connection() as conn:
             try:
                 yield conn
+                conn.commit()
 
             except Exception as e:
-                print(e)
+                print("DB ERROR:", e)
                 conn.rollback()
 
             # NOTE: no need to put a finally block here to close the connection as the context manager will do so itself

@@ -20,3 +20,12 @@ CREATE TABLE IF NOT EXISTS goal (
 CREATE TABLE IF NOT EXISTS milestone (
   number_of_days INT PRIMARY KEY
 );
+
+-- name: add_new_habit!
+-- add a new habit to the habit tracker, without returning a new id
+WITH temp_table AS (
+  INSERT INTO habit (reason_for_quitting) VALUES (:reason)
+  RETURNING habitid
+) 
+INSERT INTO goal (habitid, goal_days)
+SELECT habitid, :goal FROM temp_table;
