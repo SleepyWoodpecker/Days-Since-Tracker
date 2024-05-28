@@ -2,6 +2,7 @@
 -- create all tables necessary for the days-since-app
 CREATE TABLE IF NOT EXISTS habit (
   habitid SERIAL PRIMARY KEY,
+  habit_name TEXT NOT NULL,
   reason_for_quitting TEXT NOT NULL
 );
 
@@ -26,7 +27,7 @@ CREATE TABLE IF NOT EXISTS milestone (
 -- name: add_new_habit!
 -- add a new habit to the habit tracker, without returning a new id
 WITH temp_table AS (
-  INSERT INTO habit (reason_for_quitting) VALUES (:reason)
+  INSERT INTO habit (habit_name, reason_for_quitting) VALUES (:habit_name, :reason)
   RETURNING habitid
 ) 
 INSERT INTO goal (habitid, goal_days)

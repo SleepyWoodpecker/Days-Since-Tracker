@@ -20,6 +20,10 @@ class NewHabitFormStore {
   setReason(newReason) {
     this.reason = newReason;
   }
+
+  get formValues() {
+    return { habitName: this.habitName, goal: this.goal, reason: this.reason };
+  }
 }
 
 const habitFormStore = new NewHabitFormStore();

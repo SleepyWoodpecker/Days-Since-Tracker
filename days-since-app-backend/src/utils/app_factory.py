@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from dotenv import load_dotenv, find_dotenv
 from .DB import DB
 
@@ -14,5 +15,7 @@ def create_app(db: DB) -> Flask:
         with db.conn() as conn:
             print("Setting up tables")
             db.queries.create_schema(conn)
+
+    CORS(app, resources={"*": {"origins": "http://localhost:8081"}})
 
     return app

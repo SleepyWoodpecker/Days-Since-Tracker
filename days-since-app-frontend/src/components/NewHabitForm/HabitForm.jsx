@@ -31,21 +31,6 @@ const styles = StyleSheet.create({
     gap: 40,
     marginTop: theme.componentMargin,
   },
-  submitButton: {
-    backgroundColor: theme.colors.green,
-    padding: 15,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: theme.colors.borderColor,
-    borderRadius: 20,
-    width: ((width - 2 * theme.appMargin) * 8) / 12,
-  },
-  submitButtonText: {
-    fontFamily: theme.font.bodyText,
-    fontSize: theme.fontSize.h4,
-    color: theme.colors.borderColor,
-    textAlign: "center",
-  },
 });
 
 const HabitForm = observer(() => {
@@ -77,12 +62,6 @@ const HabitForm = observer(() => {
         multiline
         numberOfLines={5}
       />
-      <Pressable
-        style={styles.submitButton}
-        onPress={() => console.log("pressed")}
-      >
-        <Text style={styles.submitButtonText}>Start Tracking</Text>
-      </Pressable>
     </View>
   );
 });

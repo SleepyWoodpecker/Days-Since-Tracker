@@ -27,6 +27,7 @@ class DB:
             except Exception as e:
                 print("DB ERROR:", e)
                 conn.rollback()
+                raise Exception from e
 
             # NOTE: no need to put a finally block here to close the connection as the context manager will do so itself
 
