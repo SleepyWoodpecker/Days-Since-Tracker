@@ -28,14 +28,13 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
 });
-// <AntDesign name="CodeSandbox" size={24} color="black" />
 
 const IconListModal = ({ modalRef }) => {
   return (
     <BottomSheet
       ref={modalRef}
       snapPoints={["60%"]}
-      // index={-1}
+      index={-1}
       style={styles.modal}
       backgroundStyle={{ backgroundColor: theme.colors.accent }}
       enablePanDownToClose
@@ -45,7 +44,9 @@ const IconListModal = ({ modalRef }) => {
         <FlatList
           style={{ height: "100%" }}
           data={iconNames}
-          renderItem={(data) => <IconListItem iconName={data.item} />}
+          renderItem={(data) => (
+            <IconListItem iconName={data.item} modalRef={modalRef} />
+          )}
           numColumns={3}
           keyExtractor={(data) => data}
           columnWrapperStyle={{ height: "75%" }}

@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, flow } from "mobx";
 import { addHabitRequest } from "../services";
 
 class HabitListStore {
@@ -7,25 +7,23 @@ class HabitListStore {
   error = false;
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      addHabit: flow,
+    });
   }
 
-  async addHabit({ habitName, goal, reason }) {
+  *addHabit({ habitName, goal, reason, iconName }) {
     try {
       this.loading = true;
-      const response = await addHabitRequest(habitName, goal, reason);
+      const response = yield addHabitRequest(habitName, goal, reason, iconName);
 
-      runInAction(() => {
-        this.loading = false;
-        return response;
-      });
+      this.loading = false;
+      return response;
     } catch (e) {
       console.error(e);
 
-      runInAction(() => {
-        this.loading = false;
-        this.error = true;
-      });
+      this.error = true;
+      this.loading = false;
     }
   }
 }

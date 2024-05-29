@@ -1,16 +1,12 @@
-import {
-  Dimensions,
-  StyleSheet,
-  View,
-  Pressable,
-  Text,
-  Image,
-} from "react-native";
+import { Dimensions, StyleSheet, View, Pressable, Text } from "react-native";
 import theme from "../../theme";
 import HabitForm from "./HabitForm";
 import habitFormStore from "../../stores/NewHabitFormStore";
 import habitList from "../../stores/HabitListStore";
 import AddImage from "../../../assets/appIcons/add-image.svg";
+import { AntDesign } from "@expo/vector-icons";
+import { observer } from "mobx-react-lite";
+import { flowResult } from "mobx";
 
 const { width } = Dimensions.get("screen");
 
@@ -48,11 +44,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const NewHabitForm = ({ modalRef }) => {
+const NewHabitForm = observer(({ modalRef }) => {
+  const formStore = habitFormStore;
+
   const handleSubmitForm = async () => {
     const { formValues } = habitFormStore;
-    r = await habitList.addHabit(formValues);
-    console.log(r);
+    r = await flowResult(habitList.addHabit(formValues));
+    formStore.clearHabitForm();
   };
 
   const handleOpenModal = () => modalRef.current?.expand();
@@ -65,7 +63,15 @@ const NewHabitForm = ({ modalRef }) => {
           style={{ height: 275, width: 275, borderRadius: 200 }}
         >
           <View style={styles.iconCircle}>
-            <AddImage height={75} fill={theme.colors.borderColor} />
+            {formStore.currentIcon ? (
+              <AntDesign
+                name={formStore.currentIcon}
+                size={75}
+                color={theme.colors.borderColor}
+              />
+            ) : (
+              <AddImage height={75} fill={theme.colors.borderColor} />
+            )}
           </View>
         </Pressable>
         <HabitForm />
@@ -86,6 +92,6 @@ const NewHabitForm = ({ modalRef }) => {
       </View>
     </View>
   );
-};
+});
 
 export default NewHabitForm;

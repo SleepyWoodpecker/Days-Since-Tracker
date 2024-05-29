@@ -19,16 +19,19 @@ def new_habit():
         "habitName" not in request.json
         or "reason" not in request.json
         or "goal" not in request.json
+        or "iconName" not in request.json
     ):
         return "Missing reason for quitting and/or goal number of days", 400
 
     with db.conn() as conn:
         try:
+            print(request.json)
             rows_affected = db.queries.add_new_habit(
                 conn,
                 habit_name=request.json["habitName"],
                 reason=request.json["reason"],
                 goal=request.json["goal"],
+                icon_name=request.json["iconName"],
             )
 
             # return success only if the entry was properly added

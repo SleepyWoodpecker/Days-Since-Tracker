@@ -4,6 +4,7 @@ class NewHabitFormStore {
   habitName = "";
   goal = "";
   reason = "";
+  iconName = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -21,8 +22,28 @@ class NewHabitFormStore {
     this.reason = newReason;
   }
 
+  setIconName(iconName) {
+    this.iconName = iconName;
+  }
+
+  clearHabitForm() {
+    this.setHabitName("");
+    this.setIconName(null);
+    this.setGoal("");
+    this.setReason("");
+  }
+
+  get currentIcon() {
+    return this.iconName;
+  }
+
   get formValues() {
-    return { habitName: this.habitName, goal: this.goal, reason: this.reason };
+    return {
+      habitName: this.habitName,
+      goal: this.goal,
+      reason: this.reason,
+      iconName: this.iconName,
+    };
   }
 }
 
