@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS habit (
   habitid SERIAL PRIMARY KEY,
   habit_name TEXT NOT NULL,
   reason_for_quitting TEXT NOT NULL
+  icon_name TEXT
 );
 
 CREATE TABLE IF NOT EXISTS habit_record (
@@ -34,6 +35,17 @@ INSERT INTO goal (habitid, goal_days)
 SELECT habitid, :goal FROM temp_table;
 
 
+
 -- name: add_new_habit_record!
 -- add a new occurance of the habit
-INSERT INTO habit_record (occurance, habitid) VALUES (DATE(NOW()), :habitid)
+INSERT INTO habit_record (occurance, habitid) VALUES (DATE(NOW()), :habitid);
+
+
+
+-- name: get_all_habits
+-- get all habit records, and the associated number of days for their streak
+-- WITH temp_table AS (
+--   SELECT habitid, habit_name
+--   FROM habit
+-- )
+-- SELECT COUNT(*) as habit_streak
