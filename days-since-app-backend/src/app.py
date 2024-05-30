@@ -81,11 +81,13 @@ def get_longest_habit_for_all():
                 return "Error encountered in DB", 500
 
             # index as [0][0] because the return type is a tuple
-            max_streak_for_all_habits = [
-                streak for streak in max_streak_for_all_habits
-            ][0][0]
+            streak_data = [streak for streak in max_streak_for_all_habits][0]
 
-            return {"ok": True, "maxStreak": max_streak_for_all_habits}, 200
+            return {
+                "ok": True,
+                "maxStreak": streak_data[0],
+                "habitName": streak_data[1],
+            }, 200
 
         except Exception as e:
             print("Error in /get-longest-streak-for-all: ", e)

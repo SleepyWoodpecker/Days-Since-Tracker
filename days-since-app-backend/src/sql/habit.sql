@@ -17,10 +17,11 @@ INSERT INTO habit_record (occurance, habitid) VALUES (DATE(NOW()), :habitid);
 
 -- name: get_longest_streak
 -- get the longest streak for all traked habits
-SELECT max(streak)
+SELECT max(streak), habit_name
 FROM (
   SELECT 
     habit.habitid, 
+    habit_name,
     streak,
     occurance_start_day,
     occurance_end_day
@@ -53,8 +54,8 @@ FROM (
     )
   )
 )
+GROUP BY habit_name
 LIMIT 1;
-
 
 
 -- name: get_longest_streak_for_habit

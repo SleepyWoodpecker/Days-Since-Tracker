@@ -41,11 +41,11 @@ const DisplayCard = () => {
   const cards = [
     {
       id: "StreakPage",
-      el: <LongestStreakCard days={56} habitName={"Habit ABC"} />,
+      el: <LongestStreakCard />,
     },
     {
       id: "StreakPageClone",
-      el: <LongestStreakCard days={12} habitName={"HIHI"} />,
+      el: <LongestStreakCard />,
     },
   ];
 
