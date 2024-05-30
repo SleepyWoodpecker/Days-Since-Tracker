@@ -10,7 +10,7 @@ load_dotenv(find_dotenv())
 
 class DB:
     def __init__(self):
-        self.queries = aiosql.from_path("sql/queries.sql", "psycopg")
+        self.queries = aiosql.from_path("sql", "psycopg")
         self.pool = ConnectionPool(os.getenv("PG_CONN_STR"), open=True)
 
     # this is like a destructor in C++
